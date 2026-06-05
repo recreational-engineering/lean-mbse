@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requirements Tree Browser</title>
+  <link rel="stylesheet" href="/static/css/style.css?v={{ static_version }}" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__row">
+      <div class="app-header__brand">
+        <h1>LEAN MBSE TOOL</h1>
+        <p class="subtitle">SKIP LEVEL SYSTEMS ENGINEERING</p>
+      </div>
+      <div class="top-controls-row" aria-label="Global controls">
+        <div class="top-controls-row__field">
+          <label for="editing-mode-select" class="top-controls-row__label">EDITING MODE</label>
+          <select id="editing-mode-select" class="top-controls-row__select" aria-label="Editing mode selector">
+            <option value="deactivated">DEACTIVATED</option>
+            <option value="local">LOCAL</option>
+            <option value="git" selected>GIT</option>
+          </select>
+        </div>
+        <div class="top-controls-row__field">
+          <label for="view-mode-select" class="top-controls-row__label">View mode</label>
+          <select id="view-mode-select" class="top-controls-row__select" aria-label="View mode selector">
+            <option value="tree" selected>TREE</option>
+            <option value="table">TABLE</option>
+          </select>
+        </div>
+        <div class="top-controls-row__field">
+          <label for="analysis-mode-select" class="top-controls-row__label">Analysis mode</label>
+          <select id="analysis-mode-select" class="top-controls-row__select" aria-label="Analysis mode selector">
+            <option value="compliance" selected>COMPLIANCE ANALYSIS</option>
+            <option value="sensitivity">SENSITIVITY ANALYSIS</option>
+            <option value="comparison">COMPARISON ANALYSIS</option>
+          </select>
+        </div>
+        <div class="top-controls-row__field">
+          <label for="project-select" class="top-controls-row__label">Project</label>
+          <select id="project-select" class="top-controls-row__select" aria-label="Project selector">
+            <option value="launcher_001" selected>launcher_001</option>
+            <option value="launcher_002">launcher_002</option>
+            <option value="launcher_003">launcher_003</option>
+          </select>
+        </div>
+        <div class="top-controls-row__field">
+          <label for="branch-select" class="top-controls-row__label">Branch</label>
+          <select id="branch-select" class="top-controls-row__select" aria-label="Branch selector">
+            <option value="main" selected>main</option>
+            <option value="feature/y">feature/y</option>
+            <option value="feature/y_2">feature/y</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="app-main">
+    <button type="button" id="left-drawer-toggle" class="left-drawer-toggle" aria-label="Close left panel" aria-expanded="true"><<</button>
+    <aside id="left-panel" class="left-panel" aria-label="Editing controls">
+      <div id="left-panel-editing-content" class="left-panel__editing-content left-panel__editing-content--hidden" aria-hidden="true">
+        <button type="button" id="create-requirement-btn" class="left-panel__primary-btn" aria-label="Create requirement">Create requirement</button>
+        <section class="left-panel__section" aria-label="Edit solvable bounds">
+          <h2 class="left-panel__heading">EDIT SOLVABLE BOUNDS</h2>
+          <div class="left-panel__controls">
+            <div class="left-panel__control-row">
+              <div id="left-panel-edit-bounds-status" class="left-panel__status" aria-live="polite"></div>
+            </div>
+            <div class="left-panel__control-block">
+              <label class="left-panel__field">
+                <span class="left-panel__field-label">SAMPLE COUNT</span>
+                <input
+                  type="number"
+                  id="left-panel-sample-count"
+                  class="left-panel__field-input"
+                  inputmode="numeric"
+                  step="1"
+                  min="1"
+                  value="1000"
+                  placeholder="1000"
+                />
+              </label>
+              <button type="button" id="left-panel-resample-btn" class="left-panel__control-btn">RESAMPLE</button>
+            </div>
+            <div class="left-panel__control-row">
+              <div id="left-panel-sample-table-summary" class="left-panel__info" aria-live="polite"></div>
+            </div>
+            <div class="left-panel__control-row">
+              <button type="button" id="left-panel-show-sample-table-btn" class="left-panel__control-btn">SHOW SAMPLE TABLE</button>
+            </div>
+            <div class="left-panel__control-row">
+              <button type="button" id="left-panel-highlight-constraints-btn" class="left-panel__control-btn">HIGHLIGHT CONSTRAINTS</button>
+            </div>
+            <div class="left-panel__control-row">
+              <button type="button" id="left-panel-highlight-targets-btn" class="left-panel__control-btn">HIGHLIGHT TARGETS</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+    <div id="viewport" class="viewport">
+      <svg id="canvas" class="canvas" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+          </marker>
+          <marker id="arrowhead-blue-overlay" markerWidth="12" markerHeight="8" refX="10.6" refY="4" orient="auto">
+            <polygon points="0 0, 12 4, 0 8" fill="#59b7f5" />
+          </marker>
+        </defs>
+        <g id="root">
+          <g id="grid-layer"></g>
+          <g id="arrows-layer"></g>
+          <g id="boxes-layer"></g>
+          <g id="relates-overlay-layer"></g>
+        </g>
+      </svg>
+      <div id="table-view" class="viewport-table viewport-table--hidden" aria-label="Requirements table view"></div>
+      <div id="viewer-placeholder" class="viewport-placeholder viewport-placeholder--hidden" aria-label="Viewer placeholder">TBD</div>
+      <div id="viewport-camera-controls" class="viewport-camera-controls viewport-camera-controls--hidden" role="toolbar" aria-label="Tree viewer controls" aria-hidden="true">
+        <button type="button" id="viewport-home-btn" class="viewport-camera-controls__button" aria-label="Return to initial tree view" title="Return to initial tree view">
+          <span class="viewport-camera-controls__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 11.5 12 5l8 6.5"></path>
+              <path d="M7.5 10.5V19h9v-8.5"></path>
+            </svg>
+          </span>
+        </button>
+        <label class="viewport-camera-controls__zoom" for="viewport-zoom-slider">
+          <span class="viewport-camera-controls__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <circle cx="10.5" cy="10.5" r="5.5"></circle>
+              <path d="m15 15 4.5 4.5"></path>
+            </svg>
+          </span>
+          <span class="viewport-camera-controls__sr-only">Zoom</span>
+          <div class="viewport-camera-controls__slider-wrap">
+            <span id="viewport-zoom-initial-marker" class="viewport-camera-controls__slider-marker" aria-hidden="true" hidden></span>
+            <input type="range" id="viewport-zoom-slider" class="viewport-camera-controls__slider" aria-label="Zoom tree viewer" />
+          </div>
+          <output id="viewport-zoom-value" class="viewport-camera-controls__value" for="viewport-zoom-slider">100%</output>
+        </label>
+      </div>
+    </div>
+    <aside id="detail-panel" class="detail-panel detail-panel--closed" aria-hidden="true">
+      <div class="detail-panel__header">
+        <div class="detail-panel__title-row">
+          <h2 class="detail-panel__title" id="detail-panel-title"></h2>
+          <button type="button" id="detail-name-edit" class="detail-panel__section-edit-btn" aria-label="Edit requirement name">✎</button>
+        </div>
+        <input type="text" id="detail-panel-name-input" class="detail-panel__input detail-panel__name-input detail-panel__name-input--hidden" placeholder="Requirement name" />
+      </div>
+      <div class="detail-panel__body">
+        <div class="detail-panel__section-head">
+          <label class="detail-panel__label">Attributes</label>
+          <button type="button" id="detail-attributes-edit" class="detail-panel__section-edit-btn" aria-label="Edit attributes">✎</button>
+        </div>
+        <div id="detail-attributes" class="detail-panel__attributes">
+          <div class="detail-panel__attribute-row">
+            <span class="detail-panel__attribute-label">ID</span>
+            <span id="detail-panel-id" class="detail-panel__attribute-value"></span>
+          </div>
+          <div class="detail-panel__attribute-row">
+            <span class="detail-panel__attribute-label">Type</span>
+            <span id="detail-panel-type" class="detail-panel__attribute-value"></span>
+          </div>
+          <div class="detail-panel__attribute-row">
+            <span class="detail-panel__attribute-label">Class</span>
+            <span id="detail-panel-class" class="detail-panel__attribute-value detail-panel__attribute-value--editable"></span>
+            <select id="detail-panel-class-input" class="detail-panel__attribute-editor">
+              <option value="alpha">ALPHA</option>
+              <option value="beta">BETA</option>
+              <option value="gamma">GAMMA</option>
+            </select>
+          </div>
+          <div class="detail-panel__attribute-row">
+            <span class="detail-panel__attribute-label">Status</span>
+            <span id="detail-panel-status" class="detail-panel__attribute-value detail-panel__attribute-value--editable"></span>
+            <select id="detail-panel-status-input" class="detail-panel__attribute-editor">
+              <option value="analysis">ANALYSIS</option>
+              <option value="verified">VERIFIED</option>
+              <option value="violated">VIOLATED</option>
+            </select>
+          </div>
+          <div class="detail-panel__attribute-row">
+            <span class="detail-panel__attribute-label">Unit</span>
+            <span id="detail-panel-unit" class="detail-panel__attribute-value detail-panel__attribute-value--editable"></span>
+            <input type="text" id="detail-panel-unit-input" class="detail-panel__attribute-editor" placeholder="unit" />
+          </div>
+          <div class="detail-panel__attribute-row detail-panel__attribute-row--driven-by">
+            <span class="detail-panel__attribute-label">Driven by</span>
+            <span id="detail-panel-driven-by" class="detail-panel__attribute-value detail-panel__attribute-value--editable"></span>
+            <input type="text" id="detail-panel-driven-by-input" class="detail-panel__attribute-editor" placeholder="Type requirement ID..." autocomplete="off" />
+            <div id="detail-driven-by-suggestions" class="detail-panel__driven-by-suggestions"></div>
+          </div>
+        </div>
+        <div class="detail-panel__section-head">
+          <label class="detail-panel__label" for="detail-definition">Definition</label>
+          <button type="button" id="detail-definition-edit" class="detail-panel__section-edit-btn" aria-label="Edit definition">✎</button>
+        </div>
+        <div id="detail-definition-display" class="detail-panel__definition-display"></div>
+        <textarea id="detail-definition" class="detail-panel__definition detail-panel__definition--hidden" rows="3" placeholder="Requirement definition…" readonly></textarea>
+        <div class="detail-panel__section-head">
+          <label class="detail-panel__label">Bounds</label>
+          <button type="button" id="detail-bounds-edit" class="detail-panel__section-edit-btn" aria-label="Edit expected bounds">✎</button>
+        </div>
+        <div class="detail-panel__plot-wrap">
+          <svg id="detail-bounds-plot" class="detail-bounds-plot" viewBox="0 0 400 80" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="detail-panel__bounds-table-wrap">
+          <div class="detail-panel__bounds-list" aria-label="Requirement bounds">
+            <div class="detail-panel__bounds-header-row" aria-hidden="true">
+              <div class="detail-panel__bounds-header-color-cell"></div>
+              <div class="detail-panel__bounds-header-cell">Type</div>
+              <div class="detail-panel__bounds-header-cell">Lower</div>
+              <div class="detail-panel__bounds-header-cell">Upper</div>
+              <div class="detail-panel__bounds-header-cell">Source</div>
+            </div>
+            <div id="detail-bounds-constrained" class="detail-panel__bounds-item detail-panel__bounds-row--constrained" hidden>
+              <div class="detail-panel__bounds-color-cell">
+                <span class="detail-panel__bound-legend detail-panel__bound-legend--constrained" aria-hidden="true"></span>
+              </div>
+              <div class="detail-panel__bounds-type-cell" data-col="type">Constrained</div>
+              <div class="detail-panel__bounds-data-cell" data-col="lower"></div>
+              <div class="detail-panel__bounds-data-cell" data-col="upper"></div>
+              <div class="detail-panel__bounds-source-cell" data-col="source-value"></div>
+            </div>
+            <div id="detail-bounds-targeted" class="detail-panel__bounds-item detail-panel__bounds-row--targeted">
+              <div class="detail-panel__bounds-color-cell">
+                <span class="detail-panel__bound-legend detail-panel__bound-legend--targeted" aria-hidden="true"></span>
+              </div>
+              <div class="detail-panel__bounds-type-cell" data-col="type">Targeted</div>
+              <div class="detail-panel__bounds-data-cell" data-col="lower"></div>
+              <div class="detail-panel__bounds-data-cell" data-col="upper"></div>
+              <div class="detail-panel__bounds-source-cell" data-col="source-value"></div>
+            </div>
+            <div id="detail-bounds-solvable" class="detail-panel__bounds-item detail-panel__bounds-row--solvable">
+              <div class="detail-panel__bounds-color-cell">
+                <span class="detail-panel__bound-legend detail-panel__bound-legend--solvable" aria-hidden="true"></span>
+              </div>
+              <div class="detail-panel__bounds-type-cell" data-col="type">Solvable</div>
+              <div class="detail-panel__bounds-data-cell" data-col="lower"></div>
+              <div class="detail-panel__bounds-data-cell" data-col="upper"></div>
+              <div class="detail-panel__bounds-source-cell" data-col="source-value"></div>
+            </div>
+            <div id="detail-bounds-required" class="detail-panel__bounds-item detail-panel__bounds-row--required">
+              <div class="detail-panel__bounds-color-cell">
+                <span class="detail-panel__bound-legend detail-panel__bound-legend--required" aria-hidden="true"></span>
+              </div>
+              <div class="detail-panel__bounds-type-cell" data-col="type">Required</div>
+              <div class="detail-panel__bounds-data-cell" data-col="lower"></div>
+              <div class="detail-panel__bounds-data-cell" data-col="upper"></div>
+              <div class="detail-panel__bounds-source-cell" data-col="source-value"></div>
+            </div>
+            <div id="detail-bounds-expected" class="detail-panel__bounds-item detail-panel__bounds-row--expected">
+              <div class="detail-panel__bounds-color-cell">
+                <span class="detail-panel__bound-legend detail-panel__bound-legend--expected" aria-hidden="true"></span>
+              </div>
+              <div class="detail-panel__bounds-type-cell" data-col="type">Expected</div>
+              <div class="detail-panel__bounds-data-cell" data-col="lower"></div>
+              <div class="detail-panel__bounds-data-cell" data-col="upper"></div>
+              <div class="detail-panel__bounds-source-cell" data-col="source-value"></div>
+            </div>
+          </div>
+          <div id="detail-source-controls" class="detail-panel__source-row">
+            <a id="detail-expected-source-link" class="detail-panel__source-btn" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+            <button type="button" id="detail-expected-source-edit" class="detail-panel__source-edit-btn" aria-label="Edit source link">✎</button>
+          </div>
+          <input type="text" id="detail-expected-source-input" class="detail-panel__input detail-panel__source-input detail-panel__source-input--hidden" placeholder="https://…" />
+        </div>
+        <div class="detail-panel__section-head">
+          <label class="detail-panel__label">Propagation</label>
+          <div class="detail-panel__section-actions">
+            <button type="button" id="detail-propagation-function-edit" class="detail-panel__section-edit-btn" aria-label="Edit propagation">✎</button>
+            <button type="button" id="detail-propagation-function-remove" class="detail-panel__section-edit-btn detail-panel__section-remove-btn" aria-label="Remove propagation function">🗑</button>
+          </div>
+        </div>
+        <div class="detail-panel__propagation-group">
+          <div id="detail-propagation-section" class="detail-panel__propagation-section">
+            <div class="detail-panel__propagation-function-row">
+              <span class="detail-panel__propagation-function-label">Function</span>
+              <input type="text" id="detail-propagation-function-input" class="detail-panel__input detail-panel__propagation-function-input detail-panel__propagation-function-input--readonly" placeholder="function_name" readonly />
+            </div>
+            <div id="detail-propagation-suggestions" class="detail-panel__propagation-suggestions"></div>
+            <div id="detail-propagation-status" class="detail-panel__propagation-status"></div>
+            <div class="detail-panel__propagation-table">
+              <div class="detail-panel__propagation-table-head">
+                <span>Parameter</span>
+                <span>Lower</span>
+                <span>Upper</span>
+                <span>INV</span>
+              </div>
+              <div id="detail-propagation-params" class="detail-panel__propagation-params"></div>
+            </div>
+          </div>
+          <div id="detail-panel-actions" class="detail-panel__actions">
+            <button type="button" id="detail-check-conflicts" class="detail-panel__btn detail-panel__btn--primary">Check conflicts</button>
+            <button type="button" id="detail-commit-git" class="detail-panel__btn detail-panel__btn--secondary" disabled>Commit to git</button>
+            <button type="button" id="detail-delete-requirement" class="detail-panel__btn detail-panel__btn--danger">DELETE REQUIREMENT</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <button type="button" id="detail-panel-toggle" class="detail-panel__toggle" aria-label="Open side panel" aria-hidden="true" aria-expanded="false" hidden tabindex="-1">>></button>
+  </main>
+  <script src="/static/js/app.js?v={{ static_version }}"></script>
+</body>
+</html>

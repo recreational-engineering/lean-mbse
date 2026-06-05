@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test Targeted Bounds</title>
+<style>
+body{font-family:system-ui;max-width:800px;margin:40px auto;padding:20px;background:#1a1a1a;color:#fff}
+input,button{padding:8px;margin:4px 0;font-size:14px}
+button{background:#0066cc;color:#fff;border:none;cursor:pointer;padding:10px 20px}
+button:hover{background:#0052a3}
+.result{background:#2a2a2a;padding:15px;margin:10px 0;border-radius:4px;white-space:pre-wrap;font-family:monospace;font-size:12px}
+.pass{color:#4ade80}
+.fail{color:#f87171}
+label{display:block;margin-top:15px;font-weight:600}
+</style>
+</head>
+<body>
+<h1>Targeted Bounds Regression Test</h1>
+<p>Testing RQ1 targeted bounds persistence through check_conflicts and commit_to_git</p>
+
+<label>Lower Bound:</label>
+<input type="number" id="lowerBound" value="100" step="any">
+
+<label>Upper Bound:</label>
+<input type="number" id="upperBound" value="200" step="any">
+
+<button onclick="runTest()">Run Full Test</button>
+<button onclick="clearResults()">Clear Results</button>
+
+<div id="results"></div>
+
+<script>
+const API = 'http://127.0.0.1:81/api';
+let results = [];
+
+function log(msg, status = 'info') {
+  const time = new Date().toLocaleTimeString();
+  results.push({time, msg, status});
+  updateDisplay();
+}
+
+function updateDisplay() {
+  const html = results.map(r => 
+    `<div class="result ${r.status}">[${r.time}] ${r.status.toUpperCase()}: ${r.msg}</div>`
+  ).join('');
+  document.getElementById('results').innerHTML = html;
+}
+
+function clearResults() {
+  results = [];
+  updateDisplay();
+}
+
+async function getTree() {
+  const res = await fetch(`${API}/requirements/tree`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
+}
+
+async function putTree(tree) {
+  const res = await fetch(`${API}/requirements/tree`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(tree)
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
+}
+
+async function checkConflicts() {
+  const res = await fetch(`${API}/conflicts/check`, {method: 'POST'});
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
+}
+
+async function commitToGit(message) {
+  const res = await fetch(`${API}/git/commit`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({message})
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
+}
+
+function findReq(tree, id) {
+  for (const req of tree) {
+    if (req.id === id) return req;
+    if (req.children) {
+      const found = findReq(req.children, id);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+async function runTest() {
+  clearResults();
+  const lower = parseFloat(document.getElementById('lowerBound').value);
+  const upper = parseFloat(document.getElementById('upperBound').value);
+  
+  try {
+    log('STEP 1: Fetching current tree...');
+    let tree = await getTree();
+    log('Tree fetched successfully');
+    
+    log('STEP 2: Finding RQ1...');
+    const rq1 = findReq(tree, 'RQ1');
+    if (!rq1) {
+      log('RQ1 not found in tree', 'fail');
+      return;
+    }
+    log(`Found RQ1: ${rq1.name}`, 'pass');
+    
+    log(`STEP 3: Setting targeted_bounds to [${lower}, ${upper}]...`);
+    rq1.targeted_bounds = [lower, upper];
+    tree = await putTree(tree);
+    log('Targeted bounds set', 'pass');
+    
+    log('STEP 4: Verifying targeted_bounds after set...');
+    const rq1_after_set = findReq(tree, 'RQ1');
+    const bounds_after_set = rq1_after_set.targeted_bounds;
+    log(`Bounds after set: ${JSON.stringify(bounds_after_set)}`);
+    if (Array.isArray(bounds_after_set) && bounds_after_set[0] === lower && bounds_after_set[1] === upper) {
+      log('✓ Bounds correct after set', 'pass');
+    } else {
+      log('✗ Bounds incorrect after set', 'fail');
+      return;
+    }
+    
+    log('STEP 5: Calling check_conflicts...');
+    await checkConflicts();
+    log('check_conflicts completed', 'pass');
+    
+    log('STEP 6: Fetching tree after check_conflicts...');
+    tree = await getTree();
+    const rq1_after_check = findReq(tree, 'RQ1');
+    const bounds_after_check = rq1_after_check.targeted_bounds;
+    log(`Bounds after check_conflicts: ${JSON.stringify(bounds_after_check)}`);
+    if (Array.isArray(bounds_after_check) && bounds_after_check[0] === lower && bounds_after_check[1] === upper) {
+      log('✓ PASS: Bounds persisted through check_conflicts', 'pass');
+    } else {
+      log('✗ FAIL: Bounds reset after check_conflicts', 'fail');
+      return;
+    }
+    
+    log('STEP 7: Calling commit_to_git...');
+    await commitToGit('Test targeted bounds persistence');
+    log('commit_to_git completed', 'pass');
+    
+    log('STEP 8: Fetching tree after commit_to_git...');
+    tree = await getTree();
+    const rq1_after_commit = findReq(tree, 'RQ1');
+    const bounds_after_commit = rq1_after_commit.targeted_bounds;
+    log(`Bounds after commit_to_git: ${JSON.stringify(bounds_after_commit)}`);
+    if (Array.isArray(bounds_after_commit) && bounds_after_commit[0] === lower && bounds_after_commit[1] === upper) {
+      log('✓ PASS: Bounds persisted through commit_to_git', 'pass');
+    } else {
+      log('✗ FAIL: Bounds reset after commit_to_git', 'fail');
+      return;
+    }
+    
+    log('═══════════════════════════════════', 'pass');
+    log('ALL TESTS PASSED! ✓', 'pass');
+    log('Targeted bounds persisted correctly', 'pass');
+    log('═══════════════════════════════════', 'pass');
+    
+  } catch (err) {
+    log(`ERROR: ${err.message}`, 'fail');
+    log(`Stack: ${err.stack}`, 'fail');
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2143 @@
+RQ1:
+  name: delta v
+  solvable_bounds:
+  - 10000.67577156457
+  - 11430.754573581698
+  solvable_distribution:
+    sample_count: 205
+    min: 10000.67577156457
+    max: 11430.754573581698
+    mean: 10318.17021656979
+    std_dev: 289.221354294118
+    one_sigma_min: 10028.948862275673
+    one_sigma_max: 10607.391570863907
+    bins:
+    - x0: 10000.67577156457
+      x1: 10102.824257422937
+      count: 55
+    - x0: 10102.824257422937
+      x1: 10204.972743281303
+      count: 33
+    - x0: 10204.972743281303
+      x1: 10307.12122913967
+      count: 35
+    - x0: 10307.12122913967
+      x1: 10409.269714998036
+      count: 21
+    - x0: 10409.269714998036
+      x1: 10511.418200856402
+      count: 22
+    - x0: 10511.418200856402
+      x1: 10613.566686714768
+      count: 12
+    - x0: 10613.566686714768
+      x1: 10715.715172573135
+      count: 10
+    - x0: 10715.715172573135
+      x1: 10817.8636584315
+      count: 2
+    - x0: 10817.8636584315
+      x1: 10920.012144289867
+      count: 3
+    - x0: 10920.012144289867
+      x1: 11022.160630148233
+      count: 3
+    - x0: 11022.160630148233
+      x1: 11124.3091160066
+      count: 3
+    - x0: 11124.3091160066
+      x1: 11226.457601864966
+      count: 2
+    - x0: 11226.457601864966
+      x1: 11328.606087723332
+      count: 2
+    - x0: 11328.606087723332
+      x1: 11430.754573581698
+      count: 2
+  targeted_bounds:
+  - 10000.0
+  - 12000.0
+  required_bounds:
+  - 10105.984270389059
+  - 11069.75934845251
+  expected_bounds:
+  - 10252.403032566244
+  - 10779.497417240877
+  driven_by: []
+  relates_to: []
+  unit: m/s
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: delta_v
+  propagation_inputs:
+    mass_burnable:
+      lower_input: RQ3
+      upper_input: RQ3
+      invert_bounds: true
+    mass_wet:
+      lower_input: RQ2
+      upper_input: RQ2
+      invert_bounds: true
+    specific_impulse:
+      lower_input: '300'
+      upper_input: '310'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: top_stub
+  class: alpha
+RQ2:
+  name: wet mass
+  solvable_bounds:
+  - 32980.556405095194
+  - 54700.46785511803
+  solvable_distribution:
+    sample_count: 205
+    min: 32980.556405095194
+    max: 54700.46785511803
+    mean: 47853.93432008061
+    std_dev: 4589.939012642613
+    one_sigma_min: 43263.995307437996
+    one_sigma_max: 52443.873332723226
+    bins:
+    - x0: 32980.556405095194
+      x1: 34531.978651525395
+      count: 1
+    - x0: 34531.978651525395
+      x1: 36083.4008979556
+      count: 1
+    - x0: 36083.4008979556
+      x1: 37634.8231443858
+      count: 4
+    - x0: 37634.8231443858
+      x1: 39186.245390816
+      count: 2
+    - x0: 39186.245390816
+      x1: 40737.66763724621
+      count: 12
+    - x0: 40737.66763724621
+      x1: 42289.08988367641
+      count: 9
+    - x0: 42289.08988367641
+      x1: 43840.51213010661
+      count: 13
+    - x0: 43840.51213010661
+      x1: 45391.93437653682
+      count: 19
+    - x0: 45391.93437653682
+      x1: 46943.35662296702
+      count: 12
+    - x0: 46943.35662296702
+      x1: 48494.778869397225
+      count: 18
+    - x0: 48494.778869397225
+      x1: 50046.201115827425
+      count: 28
+    - x0: 50046.201115827425
+      x1: 51597.623362257626
+      count: 39
+    - x0: 51597.623362257626
+      x1: 53149.045608687826
+      count: 31
+    - x0: 53149.045608687826
+      x1: 54700.46785511803
+      count: 16
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 45658.02850040427
+  - 52512.26400586929
+  expected_bounds:
+  - 47367.989230605854
+  - 50733.74015805147
+  driven_by:
+  - RQ1
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ10
+      upper_input: RQ10
+      invert_bounds: false
+    summand2:
+      lower_input: RQ11
+      upper_input: RQ11
+      invert_bounds: false
+    summand3:
+      lower_input: RQ12
+      upper_input: RQ12
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ3:
+  name: burnable mass
+  solvable_bounds:
+  - 31789.507123578747
+  - 52981.89977886133
+  solvable_distribution:
+    sample_count: 205
+    min: 31789.507123578747
+    max: 52981.89977886133
+    mean: 46313.282087711836
+    std_dev: 4452.373695794485
+    one_sigma_min: 41860.90839191735
+    one_sigma_max: 50765.65578350632
+    bins:
+    - x0: 31789.507123578747
+      x1: 33303.24945609893
+      count: 1
+    - x0: 33303.24945609893
+      x1: 34816.99178861912
+      count: 1
+    - x0: 34816.99178861912
+      x1: 36330.7341211393
+      count: 4
+    - x0: 36330.7341211393
+      x1: 37844.47645365948
+      count: 1
+    - x0: 37844.47645365948
+      x1: 39358.21878617967
+      count: 13
+    - x0: 39358.21878617967
+      x1: 40871.96111869985
+      count: 8
+    - x0: 40871.96111869985
+      x1: 42385.70345122003
+      count: 13
+    - x0: 42385.70345122003
+      x1: 43899.44578374022
+      count: 20
+    - x0: 43899.44578374022
+      x1: 45413.188116260404
+      count: 13
+    - x0: 45413.188116260404
+      x1: 46926.93044878059
+      count: 17
+    - x0: 46926.93044878059
+      x1: 48440.672781300775
+      count: 27
+    - x0: 48440.672781300775
+      x1: 49954.415113820956
+      count: 40
+    - x0: 49954.415113820956
+      x1: 51468.15744634114
+      count: 32
+    - x0: 51468.15744634114
+      x1: 52981.89977886133
+      count: 15
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 44459.45945945946
+  - 50818.181818181816
+  expected_bounds:
+  - 46000.0
+  - 49176.470588235294
+  driven_by:
+  - RQ1
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ8
+      upper_input: RQ8
+      invert_bounds: false
+    summand2:
+      lower_input: RQ9
+      upper_input: RQ9
+      invert_bounds: false
+    summand3:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ4:
+  name: mixture ratio
+  solvable_bounds:
+  - 3.002147776841986
+  - 3.799104152151026
+  solvable_distribution:
+    sample_count: 205
+    min: 3.002147776841986
+    max: 3.799104152151026
+    mean: 3.368527978718197
+    std_dev: 0.22730545464568122
+    one_sigma_min: 3.1412225240725156
+    one_sigma_max: 3.5958334333638784
+    bins:
+    - x0: 3.002147776841986
+      x1: 3.0590732322212033
+      count: 15
+    - x0: 3.0590732322212033
+      x1: 3.1159986876004204
+      count: 19
+    - x0: 3.1159986876004204
+      x1: 3.1729241429796375
+      count: 19
+    - x0: 3.1729241429796375
+      x1: 3.2298495983588547
+      count: 18
+    - x0: 3.2298495983588547
+      x1: 3.2867750537380718
+      count: 13
+    - x0: 3.2867750537380718
+      x1: 3.343700509117289
+      count: 16
+    - x0: 3.343700509117289
+      x1: 3.400625964496506
+      count: 14
+    - x0: 3.400625964496506
+      x1: 3.457551419875723
+      count: 11
+    - x0: 3.457551419875723
+      x1: 3.5144768752549402
+      count: 17
+    - x0: 3.5144768752549402
+      x1: 3.5714023306341574
+      count: 13
+    - x0: 3.5714023306341574
+      x1: 3.6283277860133745
+      count: 17
+    - x0: 3.6283277860133745
+      x1: 3.6852532413925916
+      count: 10
+    - x0: 3.6852532413925916
+      x1: 3.7421786967718087
+      count: 12
+    - x0: 3.7421786967718087
+      x1: 3.799104152151026
+      count: 11
+  required_bounds:
+  - 3.3
+  - 3.7
+  expected_bounds:
+  - 3.4
+  - 3.6
+  driven_by: []
+  relates_to:
+  - RQ9
+  unit: /
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 3.0
+  - 3.8
+  type: constrain_stub
+  class: alpha
+RQ5:
+  name: ox temperature
+  solvable_bounds:
+  - 90.0914532971603
+  - 104.99813295593368
+  solvable_distribution:
+    sample_count: 205
+    min: 90.0914532971603
+    max: 104.99813295593368
+    mean: 97.70324041810832
+    std_dev: 4.027265348250099
+    one_sigma_min: 93.67597506985823
+    one_sigma_max: 101.73050576635842
+    bins:
+    - x0: 90.0914532971603
+      x1: 91.15621612992983
+      count: 14
+    - x0: 91.15621612992983
+      x1: 92.22097896269935
+      count: 12
+    - x0: 92.22097896269935
+      x1: 93.28574179546888
+      count: 12
+    - x0: 93.28574179546888
+      x1: 94.35050462823841
+      count: 9
+    - x0: 94.35050462823841
+      x1: 95.41526746100794
+      count: 18
+    - x0: 95.41526746100794
+      x1: 96.48003029377746
+      count: 15
+    - x0: 96.48003029377746
+      x1: 97.54479312654699
+      count: 19
+    - x0: 97.54479312654699
+      x1: 98.60955595931652
+      count: 17
+    - x0: 98.60955595931652
+      x1: 99.67431879208604
+      count: 15
+    - x0: 99.67431879208604
+      x1: 100.73908162485557
+      count: 17
+    - x0: 100.73908162485557
+      x1: 101.8038444576251
+      count: 20
+    - x0: 101.8038444576251
+      x1: 102.86860729039464
+      count: 14
+    - x0: 102.86860729039464
+      x1: 103.93337012316415
+      count: 11
+    - x0: 103.93337012316415
+      x1: 104.99813295593368
+      count: 12
+  required_bounds:
+  - 91.0
+  - 95.0
+  expected_bounds:
+  - 92.0
+  - 94.0
+  driven_by: []
+  relates_to:
+  - RQ17
+  - RQ19
+  unit: K
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 90.0
+  - 105.0
+  type: constrain_stub
+  class: alpha
+RQ6:
+  name: fu temperature
+  solvable_bounds:
+  - 91.11043288024285
+  - 109.93876554467404
+  solvable_distribution:
+    sample_count: 205
+    min: 91.11043288024285
+    max: 109.93876554467404
+    mean: 100.14255366723313
+    std_dev: 5.316835268594261
+    one_sigma_min: 94.82571839863887
+    one_sigma_max: 105.45938893582739
+    bins:
+    - x0: 91.11043288024285
+      x1: 92.45531378484509
+      count: 14
+    - x0: 92.45531378484509
+      x1: 93.80019468944731
+      count: 14
+    - x0: 93.80019468944731
+      x1: 95.14507559404953
+      count: 22
+    - x0: 95.14507559404953
+      x1: 96.48995649865176
+      count: 17
+    - x0: 96.48995649865176
+      x1: 97.834837403254
+      count: 12
+    - x0: 97.834837403254
+      x1: 99.17971830785622
+      count: 10
+    - x0: 99.17971830785622
+      x1: 100.52459921245844
+      count: 15
+    - x0: 100.52459921245844
+      x1: 101.86948011706068
+      count: 16
+    - x0: 101.86948011706068
+      x1: 103.21436102166291
+      count: 16
+    - x0: 103.21436102166291
+      x1: 104.55924192626513
+      count: 19
+    - x0: 104.55924192626513
+      x1: 105.90412283086735
+      count: 14
+    - x0: 105.90412283086735
+      x1: 107.24900373546959
+      count: 12
+    - x0: 107.24900373546959
+      x1: 108.59388464007182
+      count: 12
+    - x0: 108.59388464007182
+      x1: 109.93876554467404
+      count: 12
+  required_bounds:
+  - 92.0
+  - 100.0
+  expected_bounds:
+  - 93.0
+  - 96.0
+  driven_by: []
+  relates_to:
+  - RQ20
+  - RQ22
+  unit: K
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 91.0
+  - 110.0
+  type: constrain_stub
+  class: alpha
+RQ7:
+  name: ullage volume
+  solvable_bounds:
+  - 0.5281947600353367
+  - 4.949300519693287
+  solvable_distribution:
+    sample_count: 205
+    min: 0.5281947600353367
+    max: 4.949300519693287
+    mean: 2.552357769211995
+    std_dev: 1.207169052384107
+    one_sigma_min: 1.3451887168278882
+    one_sigma_max: 3.7595268215961024
+    bins:
+    - x0: 0.5281947600353367
+      x1: 0.8439880285823331
+      count: 14
+    - x0: 0.8439880285823331
+      x1: 1.1597812971293295
+      count: 15
+    - x0: 1.1597812971293295
+      x1: 1.475574565676326
+      count: 16
+    - x0: 1.475574565676326
+      x1: 1.7913678342233224
+      count: 19
+    - x0: 1.7913678342233224
+      x1: 2.107161102770319
+      count: 14
+    - x0: 2.107161102770319
+      x1: 2.4229543713173154
+      count: 27
+    - x0: 2.4229543713173154
+      x1: 2.738747639864312
+      count: 17
+    - x0: 2.738747639864312
+      x1: 3.054540908411308
+      count: 12
+    - x0: 3.054540908411308
+      x1: 3.3703341769583046
+      count: 14
+    - x0: 3.3703341769583046
+      x1: 3.686127445505301
+      count: 14
+    - x0: 3.686127445505301
+      x1: 4.001920714052297
+      count: 10
+    - x0: 4.001920714052297
+      x1: 4.317713982599294
+      count: 12
+    - x0: 4.317713982599294
+      x1: 4.63350725114629
+      count: 10
+    - x0: 4.63350725114629
+      x1: 4.949300519693287
+      count: 11
+  required_bounds:
+  - 0.7
+  - 2.0
+  expected_bounds:
+  - 1.0
+  - 1.5
+  driven_by: []
+  relates_to:
+  - RQ18
+  - RQ21
+  unit: ''
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 0.5
+  - 5.0
+  type: constrain_stub
+  class: alpha
+RQ8:
+  name: ox burnable mass
+  solvable_bounds:
+  - 24740.770741255783
+  - 39998.40334510313
+  solvable_distribution:
+    sample_count: 205
+    min: 24740.770741255783
+    max: 39998.40334510313
+    mean: 35678.07328443573
+    std_dev: 3421.0262848883262
+    one_sigma_min: 32257.04699954741
+    one_sigma_max: 39099.09956932406
+    bins:
+    - x0: 24740.770741255783
+      x1: 25830.601641530593
+      count: 2
+    - x0: 25830.601641530593
+      x1: 26920.432541805403
+      count: 1
+    - x0: 26920.432541805403
+      x1: 28010.263442080213
+      count: 0
+    - x0: 28010.263442080213
+      x1: 29100.094342355023
+      count: 7
+    - x0: 29100.094342355023
+      x1: 30189.925242629834
+      count: 7
+    - x0: 30189.925242629834
+      x1: 31279.756142904647
+      count: 9
+    - x0: 31279.756142904647
+      x1: 32369.587043179454
+      count: 12
+    - x0: 32369.587043179454
+      x1: 33459.41794345427
+      count: 18
+    - x0: 33459.41794345427
+      x1: 34549.248843729074
+      count: 17
+    - x0: 34549.248843729074
+      x1: 35639.07974400389
+      count: 9
+    - x0: 35639.07974400389
+      x1: 36728.910644278694
+      count: 20
+    - x0: 36728.910644278694
+      x1: 37818.74154455351
+      count: 29
+    - x0: 37818.74154455351
+      x1: 38908.572444828314
+      count: 39
+    - x0: 38908.572444828314
+      x1: 39998.40334510313
+      count: 35
+  required_bounds:
+  - 35000.0
+  - 39000.0
+  expected_bounds:
+  - 36000.0
+  - 38000.0
+  driven_by:
+  - RQ3
+  relates_to:
+  - RQ13
+  - RQ9
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 20000.0
+  - 40000.0
+  type: constrain_stub
+  class: alpha
+RQ9:
+  name: fu burnable mass
+  solvable_bounds:
+  - 7048.736382322964
+  - 13033.410585154443
+  solvable_distribution:
+    sample_count: 205
+    min: 7048.736382322964
+    max: 13033.410585154443
+    mean: 10635.208803276118
+    std_dev: 1208.0486196105483
+    one_sigma_min: 9427.16018366557
+    one_sigma_max: 11843.257422886667
+    bins:
+    - x0: 7048.736382322964
+      x1: 7476.213111096641
+      count: 1
+    - x0: 7476.213111096641
+      x1: 7903.689839870319
+      count: 3
+    - x0: 7903.689839870319
+      x1: 8331.166568643996
+      count: 2
+    - x0: 8331.166568643996
+      x1: 8758.643297417673
+      count: 11
+    - x0: 8758.643297417673
+      x1: 9186.12002619135
+      count: 8
+    - x0: 9186.12002619135
+      x1: 9613.596754965027
+      count: 14
+    - x0: 9613.596754965027
+      x1: 10041.073483738703
+      count: 28
+    - x0: 10041.073483738703
+      x1: 10468.55021251238
+      count: 23
+    - x0: 10468.55021251238
+      x1: 10896.026941286058
+      count: 20
+    - x0: 10896.026941286058
+      x1: 11323.503670059734
+      count: 31
+    - x0: 11323.503670059734
+      x1: 11750.980398833412
+      count: 24
+    - x0: 11750.980398833412
+      x1: 12178.45712760709
+      count: 23
+    - x0: 12178.45712760709
+      x1: 12605.933856380765
+      count: 9
+    - x0: 12605.933856380765
+      x1: 13033.410585154443
+      count: 8
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 9459.459459459458
+  - 11818.181818181818
+  expected_bounds:
+  - 10000.0
+  - 11176.470588235294
+  driven_by:
+  - RQ3
+  relates_to:
+  - RQ14
+  - RQ4
+  - RQ8
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: quotient
+  propagation_inputs:
+    dividend:
+      lower_input: RQ8
+      upper_input: RQ8
+      invert_bounds: false
+    divisor:
+      lower_input: RQ4
+      upper_input: RQ4
+      invert_bounds: true
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: function_stub
+  class: alpha
+RQ10:
+  name: payload mass
+  solvable_bounds:
+  - 10.073231219787434
+  - 99.95788238327926
+  solvable_distribution:
+    sample_count: 205
+    min: 10.073231219787434
+    max: 99.95788238327926
+    mean: 52.57771745608574
+    std_dev: 26.746126790734266
+    one_sigma_min: 25.831590665351477
+    one_sigma_max: 79.32384424682002
+    bins:
+    - x0: 10.073231219787434
+      x1: 16.493563445751136
+      count: 21
+    - x0: 16.493563445751136
+      x1: 22.91389567171484
+      count: 17
+    - x0: 22.91389567171484
+      x1: 29.33422789767854
+      count: 17
+    - x0: 29.33422789767854
+      x1: 35.75456012364224
+      count: 12
+    - x0: 35.75456012364224
+      x1: 42.17489234960594
+      count: 13
+    - x0: 42.17489234960594
+      x1: 48.595224575569645
+      count: 19
+    - x0: 48.595224575569645
+      x1: 55.01555680153335
+      count: 11
+    - x0: 55.01555680153335
+      x1: 61.435889027497055
+      count: 15
+    - x0: 61.435889027497055
+      x1: 67.85622125346076
+      count: 12
+    - x0: 67.85622125346076
+      x1: 74.27655347942445
+      count: 15
+    - x0: 74.27655347942445
+      x1: 80.69688570538815
+      count: 12
+    - x0: 80.69688570538815
+      x1: 87.11721793135186
+      count: 13
+    - x0: 87.11721793135186
+      x1: 93.53755015731556
+      count: 13
+    - x0: 93.53755015731556
+      x1: 99.95788238327926
+      count: 15
+  required_bounds:
+  - 40.0
+  - 70.0
+  expected_bounds:
+  - 40.0
+  - 70.0
+  driven_by:
+  - RQ2
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 10.0
+  - 100.0
+  type: constrain_stub
+  class: alpha
+RQ11:
+  name: struture mass
+  solvable_bounds:
+  - 141.25176241280712
+  - 291.3555880457786
+  solvable_distribution:
+    sample_count: 205
+    min: 141.25176241280712
+    max: 291.3555880457786
+    mean: 212.88422414686522
+    std_dev: 28.95513361191729
+    one_sigma_min: 183.92909053494793
+    one_sigma_max: 241.8393577587825
+    bins:
+    - x0: 141.25176241280712
+      x1: 151.97346424373364
+      count: 3
+    - x0: 151.97346424373364
+      x1: 162.6951660746602
+      count: 5
+    - x0: 162.6951660746602
+      x1: 173.4168679055867
+      count: 11
+    - x0: 173.4168679055867
+      x1: 184.13856973651326
+      count: 14
+    - x0: 184.13856973651326
+      x1: 194.86027156743978
+      count: 22
+    - x0: 194.86027156743978
+      x1: 205.5819733983663
+      count: 31
+    - x0: 205.5819733983663
+      x1: 216.30367522929285
+      count: 30
+    - x0: 216.30367522929285
+      x1: 227.0253770602194
+      count: 28
+    - x0: 227.0253770602194
+      x1: 237.74707889114592
+      count: 19
+    - x0: 237.74707889114592
+      x1: 248.46878072207244
+      count: 13
+    - x0: 248.46878072207244
+      x1: 259.190482552999
+      count: 16
+    - x0: 259.190482552999
+      x1: 269.9121843839255
+      count: 11
+    - x0: 269.9121843839255
+      x1: 280.63388621485205
+      count: 1
+    - x0: 280.63388621485205
+      x1: 291.3555880457786
+      count: 1
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 158.5690409448095
+  - 274.08218768747577
+  expected_bounds:
+  - 167.98923060585128
+  - 257.26956981617496
+  driven_by:
+  - RQ2
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ17
+      upper_input: RQ17
+      invert_bounds: false
+    summand2:
+      lower_input: RQ20
+      upper_input: RQ20
+      invert_bounds: false
+    summand3:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ12:
+  name: propellant mass
+  solvable_bounds:
+  - 32820.09781578189
+  - 54351.78920453453
+  solvable_distribution:
+    sample_count: 205
+    min: 32820.09781578189
+    max: 54351.78920453453
+    mean: 47588.472378477665
+    std_dev: 4569.416977824566
+    one_sigma_min: 43019.0554006531
+    one_sigma_max: 52157.88935630223
+    bins:
+    - x0: 32820.09781578189
+      x1: 34358.07577212137
+      count: 1
+    - x0: 34358.07577212137
+      x1: 35896.053728460836
+      count: 2
+    - x0: 35896.053728460836
+      x1: 37434.03168480031
+      count: 3
+    - x0: 37434.03168480031
+      x1: 38972.00964113979
+      count: 2
+    - x0: 38972.00964113979
+      x1: 40509.98759747926
+      count: 12
+    - x0: 40509.98759747926
+      x1: 42047.965553818736
+      count: 9
+    - x0: 42047.965553818736
+      x1: 43585.943510158206
+      count: 13
+    - x0: 43585.943510158206
+      x1: 45123.92146649768
+      count: 19
+    - x0: 45123.92146649768
+      x1: 46661.89942283716
+      count: 12
+    - x0: 46661.89942283716
+      x1: 48199.87737917663
+      count: 18
+    - x0: 48199.87737917663
+      x1: 49737.855335516106
+      count: 28
+    - x0: 49737.855335516106
+      x1: 51275.83329185558
+      count: 38
+    - x0: 51275.83329185558
+      x1: 52813.81124819505
+      count: 32
+    - x0: 52813.81124819505
+      x1: 54351.78920453453
+      count: 16
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 45459.45945945946
+  - 52168.181818181816
+  expected_bounds:
+  - 47160.0
+  - 50406.470588235294
+  driven_by:
+  - RQ2
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ13
+      upper_input: RQ13
+      invert_bounds: false
+    summand2:
+      lower_input: RQ14
+      upper_input: RQ14
+      invert_bounds: false
+    summand3:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ13:
+  name: ox mass
+  solvable_bounds:
+  - 25190.100252366374
+  - 40959.078290849546
+  solvable_distribution:
+    sample_count: 205
+    min: 25190.100252366374
+    max: 40959.078290849546
+    mean: 36317.83476002078
+    std_dev: 3487.1842133175155
+    one_sigma_min: 32830.65054670326
+    one_sigma_max: 39805.018973338294
+    bins:
+    - x0: 25190.100252366374
+      x1: 26316.455826543744
+      count: 2
+    - x0: 26316.455826543744
+      x1: 27442.81140072111
+      count: 1
+    - x0: 27442.81140072111
+      x1: 28569.166974898482
+      count: 0
+    - x0: 28569.166974898482
+      x1: 29695.522549075853
+      count: 9
+    - x0: 29695.522549075853
+      x1: 30821.87812325322
+      count: 6
+    - x0: 30821.87812325322
+      x1: 31948.23369743059
+      count: 9
+    - x0: 31948.23369743059
+      x1: 33074.58927160796
+      count: 12
+    - x0: 33074.58927160796
+      x1: 34200.94484578533
+      count: 18
+    - x0: 34200.94484578533
+      x1: 35327.300419962696
+      count: 17
+    - x0: 35327.300419962696
+      x1: 36453.65599414006
+      count: 11
+    - x0: 36453.65599414006
+      x1: 37580.01156831744
+      count: 22
+    - x0: 37580.01156831744
+      x1: 38706.367142494804
+      count: 33
+    - x0: 38706.367142494804
+      x1: 39832.72271667217
+      count: 39
+    - x0: 39832.72271667217
+      x1: 40959.078290849546
+      count: 26
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 35500.0
+  - 39700.0
+  expected_bounds:
+  - 36600.0
+  - 38640.0
+  driven_by:
+  - RQ12
+  relates_to:
+  - RQ19
+  - RQ8
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ8
+      upper_input: RQ8
+      invert_bounds: false
+    summand2:
+      lower_input: RQ15
+      upper_input: RQ15
+      invert_bounds: false
+    summand3:
+      lower_input: RQ16
+      upper_input: RQ16
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ14:
+  name: fu mass
+  solvable_bounds:
+  - 7629.997563415514
+  - 13782.013580689998
+  solvable_distribution:
+    sample_count: 205
+    min: 7629.997563415514
+    max: 13782.013580689998
+    mean: 11270.63761845689
+    std_dev: 1268.9276785278098
+    one_sigma_min: 10001.709939929082
+    one_sigma_max: 12539.5652969847
+    bins:
+    - x0: 7629.997563415514
+      x1: 8069.427278935121
+      count: 3
+    - x0: 8069.427278935121
+      x1: 8508.856994454727
+      count: 1
+    - x0: 8508.856994454727
+      x1: 8948.286709974333
+      count: 4
+    - x0: 8948.286709974333
+      x1: 9387.716425493938
+      count: 10
+    - x0: 9387.716425493938
+      x1: 9827.146141013545
+      count: 10
+    - x0: 9827.146141013545
+      x1: 10266.57585653315
+      count: 17
+    - x0: 10266.57585653315
+      x1: 10706.005572052756
+      count: 24
+    - x0: 10706.005572052756
+      x1: 11145.435287572362
+      count: 21
+    - x0: 11145.435287572362
+      x1: 11584.865003091967
+      count: 25
+    - x0: 11584.865003091967
+      x1: 12024.294718611574
+      count: 23
+    - x0: 12024.294718611574
+      x1: 12463.72443413118
+      count: 25
+    - x0: 12463.72443413118
+      x1: 12903.154149650785
+      count: 26
+    - x0: 12903.154149650785
+      x1: 13342.583865170393
+      count: 9
+    - x0: 13342.583865170393
+      x1: 13782.013580689998
+      count: 7
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 9959.459459459458
+  - 12468.181818181818
+  expected_bounds:
+  - 10560.0
+  - 11766.470588235294
+  driven_by:
+  - RQ12
+  relates_to:
+  - RQ22
+  - RQ9
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ23
+      upper_input: RQ23
+      invert_bounds: false
+    summand2:
+      lower_input: RQ24
+      upper_input: RQ24
+      invert_bounds: false
+    summand3:
+      lower_input: RQ9
+      upper_input: RQ9
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ15:
+  name: ox residual mass
+  solvable_bounds:
+  - 100.28902358173237
+  - 986.1022996695013
+  solvable_distribution:
+    sample_count: 205
+    min: 100.28902358173237
+    max: 986.1022996695013
+    mean: 268.9876954062928
+    std_dev: 148.7196480906015
+    one_sigma_min: 120.26804731569129
+    one_sigma_max: 417.7073434968943
+    bins:
+    - x0: 100.28902358173237
+      x1: 163.56140044514444
+      count: 58
+    - x0: 163.56140044514444
+      x1: 226.8337773085565
+      count: 38
+    - x0: 226.8337773085565
+      x1: 290.10615417196857
+      count: 34
+    - x0: 290.10615417196857
+      x1: 353.37853103538066
+      count: 31
+    - x0: 353.37853103538066
+      x1: 416.6509078987927
+      count: 16
+    - x0: 416.6509078987927
+      x1: 479.9232847622048
+      count: 12
+    - x0: 479.9232847622048
+      x1: 543.1956616256168
+      count: 6
+    - x0: 543.1956616256168
+      x1: 606.4680384890289
+      count: 2
+    - x0: 606.4680384890289
+      x1: 669.740415352441
+      count: 2
+    - x0: 669.740415352441
+      x1: 733.0127922158531
+      count: 3
+    - x0: 733.0127922158531
+      x1: 796.2851690792652
+      count: 1
+    - x0: 796.2851690792652
+      x1: 859.5575459426773
+      count: 1
+    - x0: 859.5575459426773
+      x1: 922.8299228060894
+      count: 0
+    - x0: 922.8299228060894
+      x1: 986.1022996695013
+      count: 1
+  required_bounds:
+  - 200.0
+  - 300.0
+  expected_bounds:
+  - 250.0
+  - 270.0
+  driven_by:
+  - RQ13
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 100.0
+  - 1000.0
+  type: constrain_stub
+  class: alpha
+RQ16:
+  name: ox waste mass
+  solvable_bounds:
+  - 201.03135526963837
+  - 833.2729629253434
+  solvable_distribution:
+    sample_count: 205
+    min: 201.03135526963837
+    max: 833.2729629253434
+    mean: 370.7737801787792
+    std_dev: 140.5048166396373
+    one_sigma_min: 230.26896353914188
+    one_sigma_max: 511.27859681841653
+    bins:
+    - x0: 201.03135526963837
+      x1: 246.19147010218873
+      count: 47
+    - x0: 246.19147010218873
+      x1: 291.3515849347391
+      count: 34
+    - x0: 291.3515849347391
+      x1: 336.5116997672895
+      count: 19
+    - x0: 336.5116997672895
+      x1: 381.6718145998399
+      count: 25
+    - x0: 381.6718145998399
+      x1: 426.8319294323902
+      count: 21
+    - x0: 426.8319294323902
+      x1: 471.9920442649406
+      count: 13
+    - x0: 471.9920442649406
+      x1: 517.152159097491
+      count: 9
+    - x0: 517.152159097491
+      x1: 562.3122739300413
+      count: 12
+    - x0: 562.3122739300413
+      x1: 607.4723887625917
+      count: 7
+    - x0: 607.4723887625917
+      x1: 652.632503595142
+      count: 5
+    - x0: 652.632503595142
+      x1: 697.7926184276924
+      count: 9
+    - x0: 697.7926184276924
+      x1: 742.9527332602429
+      count: 3
+    - x0: 742.9527332602429
+      x1: 788.1128480927932
+      count: 0
+    - x0: 788.1128480927932
+      x1: 833.2729629253434
+      count: 1
+  required_bounds:
+  - 300.0
+  - 400.0
+  expected_bounds:
+  - 350.0
+  - 370.0
+  driven_by:
+  - RQ13
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 200.0
+  - 1000.0
+  type: constrain_stub
+  class: alpha
+RQ17:
+  name: ox tank structure mass
+  solvable_bounds:
+  - 102.89720764276261
+  - 224.8211339993063
+  solvable_distribution:
+    sample_count: 205
+    min: 102.89720764276261
+    max: 224.8211339993063
+    mean: 161.5112848041978
+    std_dev: 25.331806284565236
+    one_sigma_min: 136.17947851963257
+    one_sigma_max: 186.84309108876303
+    bins:
+    - x0: 102.89720764276261
+      x1: 111.60605952537287
+      count: 4
+    - x0: 111.60605952537287
+      x1: 120.31491140798315
+      count: 6
+    - x0: 120.31491140798315
+      x1: 129.0237632905934
+      count: 10
+    - x0: 129.0237632905934
+      x1: 137.73261517320367
+      count: 12
+    - x0: 137.73261517320367
+      x1: 146.44146705581392
+      count: 27
+    - x0: 146.44146705581392
+      x1: 155.1503189384242
+      count: 27
+    - x0: 155.1503189384242
+      x1: 163.85917082103447
+      count: 31
+    - x0: 163.85917082103447
+      x1: 172.56802270364471
+      count: 24
+    - x0: 172.56802270364471
+      x1: 181.276874586255
+      count: 16
+    - x0: 181.276874586255
+      x1: 189.98572646886527
+      count: 17
+    - x0: 189.98572646886527
+      x1: 198.6945783514755
+      count: 11
+    - x0: 198.6945783514755
+      x1: 207.4034302340858
+      count: 11
+    - x0: 207.4034302340858
+      x1: 216.11228211669606
+      count: 7
+    - x0: 216.11228211669606
+      x1: 224.8211339993063
+      count: 2
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 124.12672538897169
+  - 208.82663078852806
+  expected_bounds:
+  - 130.39073399115009
+  - 198.08512565219135
+  driven_by:
+  - RQ11
+  relates_to:
+  - RQ5
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: tank_structure_mass
+  propagation_inputs:
+    fluid:
+      lower_input: '"Oxygen"'
+      upper_input: '"Oxygen"'
+      invert_bounds: false
+    pressure:
+      lower_input: 4e5
+      upper_input: 6e5
+      invert_bounds: false
+    radius:
+      lower_input: '1'
+      upper_input: '1.5'
+      invert_bounds: false
+    temperature:
+      lower_input: RQ5
+      upper_input: RQ5
+      invert_bounds: true
+    volume:
+      lower_input: RQ18
+      upper_input: RQ18
+      invert_bounds: false
+    yield_strength:
+      lower_input: 400e6
+      upper_input: 400e6
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ18:
+  name: ox tank volume
+  solvable_bounds:
+  - 24.73204789768505
+  - 41.57735236899669
+  solvable_distribution:
+    sample_count: 205
+    min: 24.73204789768505
+    max: 41.57735236899669
+    mean: 35.478182425178524
+    std_dev: 3.5397653768133375
+    one_sigma_min: 31.938417048365185
+    one_sigma_max: 39.01794780199186
+    bins:
+    - x0: 24.73204789768505
+      x1: 25.935283931350167
+      count: 1
+    - x0: 25.935283931350167
+      x1: 27.138519965015284
+      count: 2
+    - x0: 27.138519965015284
+      x1: 28.3417559986804
+      count: 4
+    - x0: 28.3417559986804
+      x1: 29.54499203234552
+      count: 5
+    - x0: 29.54499203234552
+      x1: 30.748228066010636
+      count: 13
+    - x0: 30.748228066010636
+      x1: 31.951464099675754
+      count: 11
+    - x0: 31.951464099675754
+      x1: 33.15470013334087
+      count: 15
+    - x0: 33.15470013334087
+      x1: 34.35793616700599
+      count: 25
+    - x0: 34.35793616700599
+      x1: 35.56117220067111
+      count: 22
+    - x0: 35.56117220067111
+      x1: 36.76440823433622
+      count: 18
+    - x0: 36.76440823433622
+      x1: 37.96764426800134
+      count: 27
+    - x0: 37.96764426800134
+      x1: 39.17088030166646
+      count: 30
+    - x0: 39.17088030166646
+      x1: 40.37411633533158
+      count: 25
+    - x0: 40.37411633533158
+      x1: 41.57735236899669
+      count: 7
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 31.900851816613198
+  - 37.50911729772272
+  expected_bounds:
+  - 33.310043854620744
+  - 35.90383391350233
+  driven_by:
+  - RQ17
+  relates_to:
+  - RQ7
+  unit: m3
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ19
+      upper_input: RQ19
+      invert_bounds: false
+    summand2:
+      lower_input: RQ7
+      upper_input: RQ7
+      invert_bounds: false
+    summand3:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ19:
+  name: ox volume
+  solvable_bounds:
+  - 22.582112480042266
+  - 38.14035727784868
+  solvable_distribution:
+    sample_count: 205
+    min: 22.582112480042266
+    max: 38.14035727784868
+    mean: 32.92582465596654
+    std_dev: 3.215688493655782
+    one_sigma_min: 29.710136162310754
+    one_sigma_max: 36.14151314962232
+    bins:
+    - x0: 22.582112480042266
+      x1: 23.693415679885582
+      count: 2
+    - x0: 23.693415679885582
+      x1: 24.804718879728895
+      count: 1
+    - x0: 24.804718879728895
+      x1: 25.916022079572212
+      count: 0
+    - x0: 25.916022079572212
+      x1: 27.02732527941553
+      count: 7
+    - x0: 27.02732527941553
+      x1: 28.13862847925884
+      count: 9
+    - x0: 28.13862847925884
+      x1: 29.249931679102158
+      count: 12
+    - x0: 29.249931679102158
+      x1: 30.361234878945474
+      count: 16
+    - x0: 30.361234878945474
+      x1: 31.472538078788787
+      count: 18
+    - x0: 31.472538078788787
+      x1: 32.5838412786321
+      count: 12
+    - x0: 32.5838412786321
+      x1: 33.69514447847541
+      count: 31
+    - x0: 33.69514447847541
+      x1: 34.80644767831873
+      count: 24
+    - x0: 34.80644767831873
+      x1: 35.917750878162046
+      count: 37
+    - x0: 35.917750878162046
+      x1: 37.02905407800536
+      count: 27
+    - x0: 37.02905407800536
+      x1: 38.14035727784868
+      count: 9
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 31.2008518166132
+  - 35.50911729772272
+  expected_bounds:
+  - 32.310043854620744
+  - 34.40383391350233
+  driven_by:
+  - RQ18
+  relates_to:
+  - RQ13
+  - RQ5
+  unit: m3
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: volume_from_mass_temperature_pressure
+  propagation_inputs:
+    fluid:
+      lower_input: '"Oxygen"'
+      upper_input: '"Oxygen"'
+      invert_bounds: false
+    mass:
+      lower_input: RQ13
+      upper_input: RQ13
+      invert_bounds: false
+    pressure:
+      lower_input: 4e5
+      upper_input: 6e5
+      invert_bounds: false
+    temperature:
+      lower_input: RQ5
+      upper_input: RQ5
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: function_stub
+  class: alpha
+RQ20:
+  name: fu tank structure mass
+  solvable_bounds:
+  - 29.188720400970887
+  - 72.9558815183498
+  solvable_distribution:
+    sample_count: 205
+    min: 29.188720400970887
+    max: 72.9558815183498
+    mean: 51.37293934266752
+    std_dev: 8.22045649363878
+    one_sigma_min: 43.15248284902874
+    one_sigma_max: 59.5933958363063
+    bins:
+    - x0: 29.188720400970887
+      x1: 32.31494619506938
+      count: 3
+    - x0: 32.31494619506938
+      x1: 35.44117198916788
+      count: 1
+    - x0: 35.44117198916788
+      x1: 38.56739778326637
+      count: 5
+    - x0: 38.56739778326637
+      x1: 41.69362357736486
+      count: 14
+    - x0: 41.69362357736486
+      x1: 44.819849371463356
+      count: 16
+    - x0: 44.819849371463356
+      x1: 47.94607516556185
+      count: 29
+    - x0: 47.94607516556185
+      x1: 51.07230095966034
+      count: 43
+    - x0: 51.07230095966034
+      x1: 54.19852675375884
+      count: 25
+    - x0: 54.19852675375884
+      x1: 57.32475254785733
+      count: 22
+    - x0: 57.32475254785733
+      x1: 60.450978341955825
+      count: 18
+    - x0: 60.450978341955825
+      x1: 63.57720413605432
+      count: 9
+    - x0: 63.57720413605432
+      x1: 66.70342993015282
+      count: 12
+    - x0: 66.70342993015282
+      x1: 69.82965572425131
+      count: 6
+    - x0: 69.82965572425131
+      x1: 72.9558815183498
+      count: 2
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 34.442315555837816
+  - 65.25555689894769
+  expected_bounds:
+  - 37.598496614701176
+  - 59.18444416398362
+  driven_by:
+  - RQ11
+  relates_to:
+  - RQ6
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: tank_structure_mass
+  propagation_inputs:
+    fluid:
+      lower_input: '"Methane"'
+      upper_input: '"Methane"'
+      invert_bounds: false
+    pressure:
+      lower_input: 4e5
+      upper_input: 6e5
+      invert_bounds: false
+    radius:
+      lower_input: '1'
+      upper_input: '1.5'
+      invert_bounds: false
+    temperature:
+      lower_input: RQ6
+      upper_input: RQ6
+      invert_bounds: true
+    volume:
+      lower_input: RQ21
+      upper_input: RQ21
+      invert_bounds: false
+    yield_strength:
+      lower_input: 400e6
+      upper_input: 400e6
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ21:
+  name: fu tank volume
+  solvable_bounds:
+  - 19.35987389413191
+  - 35.68021264309661
+  solvable_distribution:
+    sample_count: 205
+    min: 19.35987389413191
+    max: 35.68021264309661
+    mean: 28.22996228702324
+    std_dev: 3.200722261873476
+    one_sigma_min: 25.029240025149765
+    one_sigma_max: 31.430684548896718
+    bins:
+    - x0: 19.35987389413191
+      x1: 20.525612376200815
+      count: 3
+    - x0: 20.525612376200815
+      x1: 21.691350858269722
+      count: 2
+    - x0: 21.691350858269722
+      x1: 22.85708934033863
+      count: 6
+    - x0: 22.85708934033863
+      x1: 24.022827822407535
+      count: 12
+    - x0: 24.022827822407535
+      x1: 25.188566304476446
+      count: 10
+    - x0: 25.188566304476446
+      x1: 26.354304786545352
+      count: 24
+    - x0: 26.354304786545352
+      x1: 27.52004326861426
+      count: 25
+    - x0: 27.52004326861426
+      x1: 28.685781750683166
+      count: 25
+    - x0: 28.685781750683166
+      x1: 29.851520232752073
+      count: 30
+    - x0: 29.851520232752073
+      x1: 31.01725871482098
+      count: 31
+    - x0: 31.01725871482098
+      x1: 32.182997196889886
+      count: 15
+    - x0: 32.182997196889886
+      x1: 33.348735678958796
+      count: 12
+    - x0: 33.348735678958796
+      x1: 34.5144741610277
+      count: 7
+    - x0: 34.5144741610277
+      x1: 35.68021264309661
+      count: 3
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 22.83246827757655
+  - 30.38088996587444
+  expected_bounds:
+  - 24.536853200131617
+  - 27.95550766722075
+  driven_by:
+  - RQ20
+  relates_to:
+  - RQ7
+  unit: m3
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: sum
+  propagation_inputs:
+    summand1:
+      lower_input: RQ22
+      upper_input: RQ22
+      invert_bounds: false
+    summand2:
+      lower_input: RQ7
+      upper_input: RQ7
+      invert_bounds: false
+    summand3:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+    summand4:
+      lower_input: '0'
+      upper_input: '0'
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: branch
+  class: alpha
+RQ22:
+  name: fu volume
+  solvable_bounds:
+  - 17.20993847648912
+  - 31.87289959639624
+  solvable_distribution:
+    sample_count: 205
+    min: 17.20993847648912
+    max: 31.87289959639624
+    mean: 25.677604517811233
+    std_dev: 2.878078942383701
+    one_sigma_min: 22.79952557542753
+    one_sigma_max: 28.555683460194935
+    bins:
+    - x0: 17.20993847648912
+      x1: 18.257292842196772
+      count: 2
+    - x0: 18.257292842196772
+      x1: 19.304647207904424
+      count: 2
+    - x0: 19.304647207904424
+      x1: 20.352001573612075
+      count: 4
+    - x0: 20.352001573612075
+      x1: 21.399355939319726
+      count: 11
+    - x0: 21.399355939319726
+      x1: 22.446710305027377
+      count: 8
+    - x0: 22.446710305027377
+      x1: 23.49406467073503
+      count: 19
+    - x0: 23.49406467073503
+      x1: 24.541419036442683
+      count: 21
+    - x0: 24.541419036442683
+      x1: 25.58877340215033
+      count: 28
+    - x0: 25.58877340215033
+      x1: 26.636127767857985
+      count: 28
+    - x0: 26.636127767857985
+      x1: 27.683482133565633
+      count: 28
+    - x0: 27.683482133565633
+      x1: 28.730836499273288
+      count: 19
+    - x0: 28.730836499273288
+      x1: 29.77819086498094
+      count: 25
+    - x0: 29.77819086498094
+      x1: 30.82554523068859
+      count: 5
+    - x0: 30.82554523068859
+      x1: 31.87289959639624
+      count: 5
+  targeted_bounds:
+  - null
+  - null
+  required_bounds:
+  - 22.13246827757655
+  - 28.38088996587444
+  expected_bounds:
+  - 23.536853200131617
+  - 26.45550766722075
+  driven_by:
+  - RQ21
+  relates_to:
+  - RQ14
+  - RQ6
+  unit: m3
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: volume_from_mass_temperature_pressure
+  propagation_inputs:
+    fluid:
+      lower_input: '"Methane"'
+      upper_input: '"Methane"'
+      invert_bounds: false
+    mass:
+      lower_input: RQ14
+      upper_input: RQ14
+      invert_bounds: false
+    pressure:
+      lower_input: 4e5
+      upper_input: 6e5
+      invert_bounds: false
+    temperature:
+      lower_input: RQ6
+      upper_input: RQ6
+      invert_bounds: false
+  expected_bounds_from_function: true
+  required_bounds_from_function: true
+  type: function_stub
+  class: alpha
+RQ23:
+  name: fu residual mass
+  solvable_bounds:
+  - 100.1561525181925
+  - 741.7452901442898
+  solvable_distribution:
+    sample_count: 205
+    min: 100.1561525181925
+    max: 741.7452901442898
+    mean: 266.1247107550504
+    std_dev: 140.77883872520954
+    one_sigma_min: 125.34587202984085
+    one_sigma_max: 406.9035494802599
+    bins:
+    - x0: 100.1561525181925
+      x1: 145.98394806291373
+      count: 39
+    - x0: 145.98394806291373
+      x1: 191.81174360763498
+      count: 39
+    - x0: 191.81174360763498
+      x1: 237.6395391523562
+      count: 30
+    - x0: 237.6395391523562
+      x1: 283.4673346970775
+      count: 25
+    - x0: 283.4673346970775
+      x1: 329.2951302417987
+      count: 20
+    - x0: 329.2951302417987
+      x1: 375.1229257865199
+      count: 13
+    - x0: 375.1229257865199
+      x1: 420.9507213312412
+      count: 8
+    - x0: 420.9507213312412
+      x1: 466.7785168759624
+      count: 8
+    - x0: 466.7785168759624
+      x1: 512.6063124206837
+      count: 8
+    - x0: 512.6063124206837
+      x1: 558.4341079654049
+      count: 3
+    - x0: 558.4341079654049
+      x1: 604.2619035101261
+      count: 4
+    - x0: 604.2619035101261
+      x1: 650.0896990548473
+      count: 5
+    - x0: 650.0896990548473
+      x1: 695.9174945995686
+      count: 2
+    - x0: 695.9174945995686
+      x1: 741.7452901442898
+      count: 1
+  required_bounds:
+  - 200.0
+  - 300.0
+  expected_bounds:
+  - 250.0
+  - 270.0
+  driven_by:
+  - RQ14
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 100.0
+  - 1000.0
+  type: constrain_stub
+  class: alpha
+RQ24:
+  name: fu waste mass
+  solvable_bounds:
+  - 200.59512313082416
+  - 851.245812826436
+  solvable_distribution:
+    sample_count: 205
+    min: 200.59512313082416
+    max: 851.245812826436
+    mean: 369.30410442572037
+    std_dev: 144.87623485207655
+    one_sigma_min: 224.42786957364382
+    one_sigma_max: 514.180339277797
+    bins:
+    - x0: 200.59512313082416
+      x1: 247.07017239479643
+      count: 44
+    - x0: 247.07017239479643
+      x1: 293.5452216587687
+      count: 31
+    - x0: 293.5452216587687
+      x1: 340.020270922741
+      count: 32
+    - x0: 340.020270922741
+      x1: 386.49532018671323
+      count: 31
+    - x0: 386.49532018671323
+      x1: 432.97036945068555
+      count: 18
+    - x0: 432.97036945068555
+      x1: 479.4454187146578
+      count: 9
+    - x0: 479.4454187146578
+      x1: 525.9204679786301
+      count: 12
+    - x0: 525.9204679786301
+      x1: 572.3955172426024
+      count: 4
+    - x0: 572.3955172426024
+      x1: 618.8705665065746
+      count: 8
+    - x0: 618.8705665065746
+      x1: 665.3456157705468
+      count: 6
+    - x0: 665.3456157705468
+      x1: 711.8206650345192
+      count: 2
+    - x0: 711.8206650345192
+      x1: 758.2957142984915
+      count: 2
+    - x0: 758.2957142984915
+      x1: 804.7707635624637
+      count: 1
+    - x0: 804.7707635624637
+      x1: 851.245812826436
+      count: 5
+  required_bounds:
+  - 300.0
+  - 350.0
+  expected_bounds:
+  - 310.0
+  - 320.0
+  driven_by:
+  - RQ14
+  relates_to: []
+  unit: kg
+  status: verified
+  definition: ''
+  value_source: ''
+  comments: []
+  propagation_function: ''
+  propagation_inputs: {}
+  expected_bounds_from_function: false
+  required_bounds_from_function: false
+  constrained_bounds:
+  - 200.0
+  - 1000.0
+  type: constrain_stub
+  class: alpha
